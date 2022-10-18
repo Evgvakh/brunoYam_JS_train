@@ -20,16 +20,16 @@ while (!isOver) {
     if(cities.length > 0) {
         while (counter != 1) {
             /*PREVENT THE INCOMING CITY'S INCONVINIENT ENDING*/
-            if ((cityToCompare.split("")[cityToCompare.length - 2] + cityToCompare.split("")[cityToCompare.length - 1]) === 'ый') {                
+            if ((cityToCompare.at(-2) + cityToCompare.at(-1)) === 'ый') {                
                 let b = cityToCompare.split("");                
                 let index = b.indexOf("ы");
                 b.splice(index, 2);
                 cityToCompare = b.join("");                
-                } else if (cityToCompare.split("")[cityToCompare.length - 1] == 'ь' ||
-                        cityToCompare.split("")[cityToCompare.length - 1] == 'ы' ||
-                        cityToCompare.split("")[cityToCompare.length - 1] == 'ъ' ||
-                        cityToCompare.split("")[cityToCompare.length - 1] == 'й' ||
-                        cityToCompare.split("")[cityToCompare.length - 1] == 'ё') {                        
+                } else if (cityToCompare.at(-1) == 'ь' ||
+                           cityToCompare.at(-1) == 'ы' ||
+                           cityToCompare.at(-1) == 'ъ' ||
+                           cityToCompare.at(-1) == 'й' ||
+                           cityToCompare.at(-1) == 'ё') {                        
                     let b = cityToCompare.split("");
                     delete b[b.length - 1];
                     cityToCompare = b.join("");                             
@@ -61,7 +61,7 @@ while (!isOver) {
                 userCity = prompt('Start the game by typing any city(in Russian)');
             } /*IF THE GAME HAS BEEN ALREADY STARTED - TYPE THE ONE WHICH STARTS BY NEEDED LETTER*/
             else {
-                userCity = prompt(`Type the city name starting by "${cityToCompare.split("")[cityToCompare.length - 1].toUpperCase()}"`);
+                userCity = prompt(`Type the city name starting by "${cityToCompare.at(-1).toUpperCase()}"`);
             }
             
             /*CHECKING IF THE CITY EXISTS*/
@@ -87,8 +87,8 @@ while (!isOver) {
             /*CHEKING IF THE LETTER MATCHES*/
             if(cityToCompare.length > 0) {
                 while (!isFirst) {
-                    if ((cityToCompare.split("")[cityToCompare.length - 1] !== userCity.split("")[0])) {
-                        userCity = prompt(`ERROR!!! PLEASE TYPE A CITY STARTING BY "${cityToCompare.split("")[cityToCompare.length - 1].toUpperCase()}"`);
+                    if ((cityToCompare.at(-1) !== userCity.at(0))) {
+                        userCity = prompt(`ERROR!!! PLEASE TYPE A CITY STARTING BY "${cityToCompare.at(-1).toUpperCase()}"`);
                     } else {
                         isFirst = true; 
                     }
@@ -96,17 +96,17 @@ while (!isOver) {
             }
 
             /*PREVENT THE INCONVINIENT ENDING OF THE ENTERED WORD */
-            if ((userCity.split("")[userCity.length - 2] + userCity.split("")[userCity.length - 1]) === 'ый') {
+            if ((userCity.at(-2) + userCity.at(-1)) === 'ый') {
                     userCityToSave = userCity;
                     let b = userCity.split("");                    
                     let index = b.indexOf("ы");
                     b.splice(index, 2);
                     userCity = b.join("");                    
-                } else if (userCity.split("")[userCity.length - 1] == 'ь' ||
-                           userCity.split("")[userCity.length - 1] == 'ы' ||
-                           userCity.split("")[userCity.length - 1] == 'ъ' ||
-                           userCity.split("")[userCity.length - 1] == 'й' ||
-                           userCity.split("")[userCity.length - 1] == 'ё') {                    
+                } else if (userCity.at(-1) == 'ь' ||
+                           userCity.at(-1) == 'ы' ||
+                           userCity.at(-1) == 'ъ' ||
+                           userCity.at(-1) == 'й' ||
+                           userCity.at(-1) == 'ё') {                    
                     userCityToSave = userCity;
                     let b = userCity.split("");
                     delete b[b.length - 1];
@@ -134,10 +134,10 @@ while (!isOver) {
             let arrayFromStringCities = cities[i].split("");
             let arrayFromStringPrompt = userCity.split("");        
             isOver = true;
-            finalLetter = arrayFromStringPrompt[arrayFromStringPrompt.length - 1];
+            finalLetter = arrayFromStringPrompt.at(-1);
             message = `THERE'S NO MORE CITY ENDING BY "${finalLetter.toUpperCase()}". GAME OVER. YOU WON!!!`;
             
-            if ((arrayFromStringPrompt[arrayFromStringPrompt.length - 1] == arrayFromStringCities[0]) && userCityToSave !== cities[i]) {
+            if ((arrayFromStringPrompt.at(-1) == arrayFromStringCities[0]) && userCityToSave !== cities[i]) {
                 alert(`${cities[i]}`);            
                 stockArray.push(cities[i]);
                 cityToCompare = cities[i];                
